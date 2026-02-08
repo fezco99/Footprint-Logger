@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/login.css" />
+  </head>
+  <body>
+    <div class="loginContainer">
+      <div class="loginHeader">
+        <h1>Welcome Back</h1>
+        <p>Please enter your details</p>
+      </div>
+      <div class="loginForm">
+        <input
+          id="email"
+          type="email"
+          placeholder="Name@example.com"
+          required
+        />
+        <input id="pass" type="password" placeholder="password" required />
+        <p class="error"></p>
+        <button id="logBtn">Login</button>
+        <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
+      </div>
+    </div>
+    <script src="./scripts/login.js"></script>
+  </body>
+</html>
