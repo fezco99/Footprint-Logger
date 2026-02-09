@@ -3,29 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Create Account</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/login.css" />
   </head>
+
   <body>
     <div class="loginContainer">
       <div class="loginHeader">
-        <h1>Sign Up</h1>
-        <p>Please enter your details</p>
+        <h1>Join Footprint</h1>
+        <p>Create your account to start tracking impact</p>
       </div>
+
       <div class="loginForm">
-        <input
-          id="email"
-          type="email"
-          placeholder="Name@example.com"
-          required
-        />
-        <input id="username" type="text" placeholder="username" required />
-        <input id="pass" type="password" placeholder="password" required />
+        <input id="email" type="email" placeholder="Email address" required />
+        <input id="username" type="text" placeholder="Username" required />
+        <input id="pass" type="password" placeholder="Password" required />
+
         <p class="error">incorrect details</p>
-        <button id="signupBtn">Sign up</button>
-        <p>Already have an account? <a href="./login.html">Login</a></p>
+
+        <button id="signupBtn">Create Account</button>
+
+        <p class="switch">
+          Already registered?
+          <a href="./login.html">Log in</a>
+        </p>
       </div>
     </div>
+
     <script src="./scripts/signup.js"></script>
   </body>
 </html>

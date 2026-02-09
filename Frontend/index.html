@@ -3,158 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Footprint Logger - Track Your Carbon Impact</title>
+    <title>Footprint Logger</title>
+
+    <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Karla:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Karla:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/styles.css" />
   </head>
+
   <body>
     <div class="container">
-      <header>
+      <!-- HEADER -->
+      <header class="header">
         <h1>Footprint Logger</h1>
-        <p class="tagline">
-          Track your daily carbon impact and make informed choices
-        </p>
+        <p>Track your daily carbon impact</p>
+        <img class="ppic" src="./assets/profile.png" />
       </header>
 
+      <!-- MAIN GRID -->
       <div class="main-grid">
-        <div class="card">
-          <h2>Log Activity</h2>
-          <form id="activityForm">
-            <div class="form-group">
-              <label for="category">Category</label>
-              <select id="category" required>
-                <option value="">Select category...</option>
-                <option value="transport">Transport</option>
-                <option value="food">Food</option>
-                <option value="energy">Energy</option>
-              </select>
-            </div>
+        <!-- ACTIVITIES -->
+        <section class="activities card">
+          <h2>Log Activities</h2>
 
-            <div class="form-group">
-              <label for="activity">Activity</label>
-              <select id="activity" required disabled>
-                <option value="">Select activity...</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="amount">Amount</label>
-              <div class="input-with-unit">
-                <input
-                  type="number"
-                  id="amount"
-                  step="0.1"
-                  min="0"
-                  required
-                  disabled
-                />
-                <span class="unit" id="unit">-</span>
-              </div>
-            </div>
-
-            <button type="submit">Add Activity</button>
-          </form>
-        </div>
-
-        <!-- Activity List -->
-        <div class="card">
-          <h2>Your Activities</h2>
-          <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="transport">
-              Transport
-            </button>
-            <button class="filter-btn" data-filter="food">Food</button>
-            <button class="filter-btn" data-filter="energy">Energy</button>
+          <div class="sections">
+            <button id="all" class="active">All</button>
+            <button id="transport">Transport</button>
+            <button id="food">Food</button>
+            <button id="energy">Energy</button>
+            <button id="shopping">Shopping</button>
           </div>
-          <div class="activities-list" id="activitiesList">
-            <div class="empty-state">
-              <div class="empty-state-icon">🌱</div>
-              <p>
-                No activities logged yet.<br />Start tracking your footprint!
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <!-- Summary Card -->
-        <div class="card summary-card">
-          <h2>Carbon Footprint Summary</h2>
-          <div class="total-display">
-            <div class="total-label">Total Emissions</div>
-            <div class="total-amount" id="totalCO2">0</div>
-            <div class="total-unit">kg CO₂</div>
+          <div class="options"></div>
+
+          <hr />
+
+          <div class="custom">
+            <label>Add Custom Activity</label>
+
+            <input id="actName" type="text" placeholder="Activity name" />
+
+            <select id="category">
+              <option>Transport</option>
+              <option>food</option>
+              <option>energy</option>
+              <option>shopping</option>
+            </select>
+
+            <input id="co2" type="number" placeholder="CO₂" />
+
+            <button class="addAct">Add Activity</button>
           </div>
-          <div class="chart-container">
-            <div class="bar-chart">
-              <div class="bar-item">
-                <div class="bar-label">
-                  <span>Transport</span>
-                  <span id="transportTotal">0 kg</span>
-                </div>
-                <div class="bar-bg">
-                  <div
-                    class="bar-fill transport"
-                    id="transportBar"
-                    style="width: 0%"
-                  >
-                    <span id="transportPercent">0%</span>
-                  </div>
-                </div>
-              </div>
-              <div class="bar-item">
-                <div class="bar-label">
-                  <span>Food</span>
-                  <span id="foodTotal">0 kg</span>
-                </div>
-                <div class="bar-bg">
-                  <div class="bar-fill food" id="foodBar" style="width: 0%">
-                    <span id="foodPercent">0%</span>
-                  </div>
-                </div>
-              </div>
-              <div class="bar-item">
-                <div class="bar-label">
-                  <span>Energy</span>
-                  <span id="energyTotal">0 kg</span>
-                </div>
-                <div class="bar-bg">
-                  <div class="bar-fill energy" id="energyBar" style="width: 0%">
-                    <span id="energyPercent">0%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="pie-legend">
-              <div class="legend-item">
-                <div class="legend-color transport"></div>
-                <div class="legend-text">
-                  <div class="legend-value" id="transportLegend">0%</div>
-                  <div>Transport</div>
-                </div>
-              </div>
-              <div class="legend-item">
-                <div class="legend-color food"></div>
-                <div class="legend-text">
-                  <div class="legend-value" id="foodLegend">0%</div>
-                  <div>Food</div>
-                </div>
-              </div>
-              <div class="legend-item">
-                <div class="legend-color energy"></div>
-                <div class="legend-text">
-                  <div class="legend-value" id="energyLegend">0%</div>
-                  <div>Energy</div>
-                </div>
-              </div>
-            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="total card summary-card">
+          <h2>Summary</h2>
+
+          <div class="usage">
+            <p>Total CO₂</p>
+            <p class="cost">0.0 CO₂</p>
+            <p class="avg">average: 0.0 CO₂</p>
           </div>
-        </div>
+
+          <div class="chart">
+            <canvas id="chartData"></canvas>
+          </div>
+
+          <div class="past">
+            <h3>Past Activities</h3>
+          </div>
+        </section>
+      </div>
+
+      <!-- FOOTER GRID -->
+      <div class="foot">
+        <section class="summary card">
+          <div class="summaryTitle">
+            <h2>Weekly Summary</h2>
+            <h3 id="streak">Streak: 0</h3>
+          </div>
+
+          <p id="weeklyTotal">Weekly Total:</p>
+
+          <div class="barChart"></div>
+        </section>
+
+        <section class="leaderboard card">
+          <h2>Leaderboard</h2>
+          <div class="leaderboardContent"></div>
+        </section>
       </div>
     </div>
+
+    <!-- ALERT -->
+    <div id="myAlert">
+      <p>Are you sure you want to Sign out?</p>
+      <button id="okBtn">Sign out</button>
+      <button id="cancelBtn">Cancel</button>
+    </div>
+
     <script src="./scripts/app.js"></script>
   </body>
 </html>
