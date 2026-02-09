@@ -1,7 +1,5 @@
 # Footprint-Logger
 
-# Footprint Logger
-
 A web app that helps users track their daily activities and estimate their carbon footprint. Users can log behaviors like travel, food consumption, and energy use, see a running total of their emissions, and view summaries through charts.
 
 ## **Features**
